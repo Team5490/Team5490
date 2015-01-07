@@ -6,13 +6,10 @@ Git is repository of our work, and also a way to preserve revision history. It a
 To begin, if you have never used git before, go to https://github.com and create an account. After doing this, ask one of us (currently Joren, Tyler, Matt) to give you permision to access the repository.
 
 In the meantime, there are a few BASH commands that you will need to know to connect to the git repository. These commands are run in the Terminal program that you can find using spotlight or by searching endlessly through your folders like an especially tech-savvy caveman (I have a tendency to do this).once terminal is running, the BASH commands you will need to know are:
-
 	cd
 This command stands for change directory, and changes what folder your terminal is working inside.
-
 	ls
 This command stands for list, and lists all the files and directories contained in your current directory (folder).
-
 	pwd
 This command stands for print working directory, and simply gives the name of the directory your terminal is currently in.
 
