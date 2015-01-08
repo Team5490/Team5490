@@ -61,9 +61,9 @@ Both will get you out of vim. If you really want to learn vim, it is explained p
 Some Other Small Things
 Although most of the work we will be doing is in java, there will be times when we have to edit text files as well. We all know that Text Edit is just about the most boring text editor out there. Even worse, it uses 8-space tabs.        That's a lot of wasted space that looks bad, and what's more, Eclipse uses 4-space tabs. Being ugly is bad enough, but inconsistency is worse. However, there is is very nice text editor with lots of pretty color palates and syntax coloring(more useful if you get into javascript or python) called Sublime. It is subscription based, but the company offers an unlimited duration full-feature trial. Because stronk business model is stronk. But more importantly, it has 4-space tabs. This isn't that important, but really you won't want to use Text Edit after Sublime.
 
-Some small terminal things
+Some Small Terminal Things
 It can get annoying to have to constantly type out the whole path, and there are a couple ways to make life easier on your fingers. When you type out a file path, instead of typing out the full /Users/[user]/foo/, you can use a tilde (~) at the start of the file path. The tilde goes at the start of the file path and replaces /Users/[user]/ in the start of the file path. For example, a file path of ~/Documents/ takes you to the current user’s documents folder.
 
-If you’re messing around in the terminal and you get stuck with a program running that you don’t want or just want to escape from what you’re running, press control+c. 
+If you’re messing around in the terminal and you get stuck with a program running that you don’t want or just want to escape from what you’re running, press control + c. 
 
-Lastly, you’ll commonly see ‘DS_Store’ when using git. Feel free to ignore it. It’s an osx file that has no meaning besides some small system things (i.e. organization), and it replaces itself when the folder is accessed.
+Lastly, you’ll commonly see ‘.DS_Store’ when using git. Feel free to ignore it. It’s an OS X file that has no meaning besides some small system things (i.e. organization), and it replaces itself when the folder is accessed.
