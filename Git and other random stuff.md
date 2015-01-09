@@ -1,4 +1,5 @@
 Basics of Git
+============
 
 Git is repository of our work, and also a way to preserve revision history. It allows us to share what we are working on in a way that has been optimised for coding, and allows us to revert to any previous version if Dave somehow screws it up.
 
@@ -32,13 +33,13 @@ followed by the command you’re unsure of (in one line).
 
 Once you've been added as a contributor, create a folder somewhere on your computer where you want all the files from the project to go. The way git works is that even though everything is in our online repository, the files are saved locally on your computer, and all your changes remain local until you want to share them or back them up remotely. After you create the folder, navigate to it in the terminal window. Probably the easiest way to do this is to type cd into the terminal, and then click and drag your folder into the terminal window. This should copy the file location into the command line, leaving you with something like:
 
-cd /Users/student/Documents/Robotics2015
+	cd /Users/student/Documents/Robotics2015
 
 After which you can hit enter and to make sure it worked, type pwd. It should return the address of your folder (i.e. /Users/student/Documents/Robotics2015).
 
 With your folder ready, you can enter the command:
 
-git clone https://github.com/Team5490/Team5490.git
+	git clone https://github.com/Team5490/Team5490.git
 
 which will copy the files that have already been created into your folder in a folder called Team5490. If prompted for username, type the username you used for your github account, and likewise for password. With the repository cloned onto your computer, you should be able to see, in that folder, everything that has been added to the repository.
 
@@ -65,7 +66,9 @@ files. To commit these files, run the command:
 	git commit -m "a useful description of what you have done"
 
 It is very important that the description of the commit describe what you did since your last commit, so that if we ever have to roll back to a previous version, we know what happened in each commit. From here, another git status will say "Your branch is ahead of origin master by 1 commit" in the best case, or may say something to the effect of "Your branch is not up to date." Either way, it is good to get into the habit of using
+
 	git pull
+
 somewhat frequently while working. What this does is update your files to match the changes that others have added to the repository, so that you don't end up with numerous conflicts. If you do receive the message that there is a merging conflict, meaning that two different changes have been made to the same file, you will have to manually merge, which we can go over when it comes up. After making sure you are up to date by using git pull, you can now run
 
 	git push origin master
@@ -96,15 +99,21 @@ Both will get you out of vim. If you really want to learn vim, it is explained p
 
 
 Some Other Small Things
+---------
 
 Although most of the work we will be doing is in java, there will be times when we have to edit text files as well. We all know that Text Edit is just about the most boring text editor out there. Even worse, it uses 8-space tabs. That's a lot of wasted space that looks bad, and what's more, Eclipse uses 4-space tabs. Being ugly is bad enough, but inconsistency is worse. However, there is is very nice text editor with lots of pretty color palates and syntax coloring(more useful if you get into javascript or python) called Sublime. It is subscription based, but the company offers an unlimited duration full-feature trial. Because stronk business model is stronk. But more importantly, it has 4-space tabs. This isn't that important, but really you won't want to use Text Edit after Sublime.
 
-Some Small Terminal Things
+---
+
+## Some Small Terminal Things ##
 
 It can get annoying to have to constantly type out the whole path, and there are a couple ways to make life easier on your fingers. When you type out a file path, instead of typing out the full /Users/[user]/foo/, you can use a tilde (~) at the start of the file path. The tilde goes at the start of the file path and replaces /Users/[user]/ in the start of the file path. For example, a file path of ~/Documents/ takes you to the current user’s documents folder.
 
 If you’re messing around in the terminal and you get stuck with a program running that you don’t want or just want to escape from what you’re running, press control + c.
 
+---
+
 About .md
 
-You probably noticed this is actually formatted. There is a filetype called markdown (extension: .md) which allows near-plaintext with formatting that doesn’t do what .txt does. Of course, this doesn’t mean that we shouldn’t use .txt, which is easier and more efficient where format doesn’t matter. .md files can also be edited through the web gui on github.com, by opening the file and clicking the pencil.
+You probably noticed this is actually formatted. There is a filetype called markdown (extension: .md) which allows near-plaintext with formatting that doesn’t do what .txt does (If you're familiar with reddit formatting, it's prett much the same). Of course, this doesn’t mean that we shouldn’t use .txt, which is easier and more efficient where format doesn’t matter. .md files can also be edited through the web gui on github.com, by opening the file and clicking the pencil.
+For info on the markdown, look no further than [here](https://github.com/fletcher/MultiMarkdown/blob/master/Documentation/Markdown%20Syntax.md)
