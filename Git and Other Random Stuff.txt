@@ -65,5 +65,3 @@ Some Small Terminal Things
 It can get annoying to have to constantly type out the whole path, and there are a couple ways to make life easier on your fingers. When you type out a file path, instead of typing out the full /Users/[user]/foo/, you can use a tilde (~) at the start of the file path. The tilde goes at the start of the file path and replaces /Users/[user]/ in the start of the file path. For example, a file path of ~/Documents/ takes you to the current user’s documents folder.
 
 If you’re messing around in the terminal and you get stuck with a program running that you don’t want or just want to escape from what you’re running, press control + c. 
-
-Lastly, you’ll commonly see ‘.DS_Store’ when using git. Feel free to ignore it. It’s an OS X file that has no meaning besides some small system things (i.e. organization), and it replaces itself when the folder is accessed.
