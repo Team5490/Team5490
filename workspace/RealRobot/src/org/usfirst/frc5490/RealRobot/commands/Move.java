@@ -39,19 +39,19 @@ public class  Move extends Command {
     protected void execute() {
 
         drive left = new drive();
-            double driveLeft = left.leftMotor();
+            double driveLeft = left.leftMotor();       //retrieve left and right motor speeds from DriveTrain
         drive right = new drive();
             double driveRight = right.rightMotor();
 
-        double driveTotal = driveLeft + driveRight;
+        double driveTotal = driveLeft + driveRight;     //total motor output used to test if robot is moving
 
-        if (driveTotal > 0) {
+        if (driveTotal > 0) {                           //robot is moving, so set motors to speed
         RobotMap.driveTrainLeftFront.set(driveLeft);
         RobotMap.driveTrainLeftRear.set(driveLeft);
-        RobotMap.driveTrainRightFront.set(-driveRight);
+        RobotMap.driveTrainRightFront.set(-driveRight); //right motors go in opposite direction
         RobotMap.driveTrainRightFront.set(-driveRight);
     }   else {
-        RobotMap.driveTrainLeftFront.set(0);
+        RobotMap.driveTrainLeftFront.set(0);            //set motors to zero if robot is not moving
         RobotMap.driveTrainLeftRear.set(0);
         RobotMap.driveTrainRightFront.set(0);
         RobotMap.driveTrainRightFront.set(0);
@@ -60,7 +60,7 @@ public class  Move extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
