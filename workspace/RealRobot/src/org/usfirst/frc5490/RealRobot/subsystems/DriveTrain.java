@@ -38,14 +38,24 @@ public void drive()  {
     double ySpeed = joystickPosition.getYValue();
 
     private double driveSpeed;
-    this.driveSpeed = (((ySpeed+1)/2)^3)-0.125;
+    this.driveSpeed = ySpeed^3;
 
     public double getDriveSpeed()   {
         return this.driveSpeed;
     }
 
-    if (driveSpeed > 0.8)   {
-        driveSpeed = 0.8;
+    //if (driveSpeed > 0.8)   {
+        //driveSpeed = 0.8;
+    //}
+    //if (driveSpeed < -0.8)    {
+        //driveSpeed = -0.8;
+    //}
+}
+    if (0 < driveSpeed < 0.05)  {
+        driveSpeed = 0;
+    }
+    if (0 > driveSpeed > -0.05) {
+        driveSpeed = 0;
     }
 
     OI joystickPosition = new OI();
@@ -64,12 +74,12 @@ public void drive()  {
     }
 
     if (xSteer > 1 and driveSpeed = 0)  {
-        this.leftSpeed = 0.5;
-        this.rightSpeed = -0.5;
+        this.leftSpeed = 0.3;
+        this.rightSpeed = -0.3;
     }
     if (xSteer < 1 and driveSpeed = 0)  {
-        this.leftSpeed = -0.5;
-        this.rightSpeed = 0.5;
+        this.leftSpeed = -0.3;
+        this.rightSpeed = 0.3;
     }
 
     public double leftMotor()   {
