@@ -14,10 +14,13 @@ package org.usfirst.frc5490.RealRobot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc5490.RealRobot.Robot;
 
+import  org.usfirst.frc5490.RealRobot.subsystems.driveTrain;
+
 /**
  *
  */
 public class  Move extends Command {
+
 
     public Move() {
         // Use requires() here to declare subsystem dependencies
@@ -34,6 +37,25 @@ public class  Move extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+
+        drive left = new drive();
+            double driveLeft = left.leftMotor();
+        drive right = new drive();
+            double driveRight = right.rightMotor();
+
+        double driveTotal = driveLeft + driveRight;
+
+        if (driveTotal > 0) {
+        RobotMap.driveTrainLeftFront.set(driveLeft);
+        RobotMap.driveTrainLeftRear.set(driveLeft);
+        RobotMap.driveTrainRightFront.set(-driveRight);
+        RobotMap.driveTrainRightFront.set(-driveRight);
+    }   else {
+        RobotMap.driveTrainLeftFront.set(0);
+        RobotMap.driveTrainLeftRear.set(0);
+        RobotMap.driveTrainRightFront.set(0);
+        RobotMap.driveTrainRightFront.set(0);
+    }
     }
 
     // Make this return true when this Command no longer needs to run execute()
