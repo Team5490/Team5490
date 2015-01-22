@@ -12,9 +12,11 @@
 package org.usfirst.frc5490.RealRobot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc5490.RealRobot.Robot;
 
-import  org.usfirst.frc5490.RealRobot.subsystems.driveTrain;
+import org.usfirst.frc5490.RealRobot.Robot;
+import org.usfirst.frc5490.RealRobot.subsystems.DriveTrain;
+
+import  org.usfirst.frc5490.RealRobot.RobotMap;
 
 /**
  *
@@ -33,14 +35,15 @@ public class  Move extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 
-        drive left = new drive();
+    	DriveTrain left = new DriveTrain();
             double driveLeft = left.leftMotor();       //retrieve left and right motor speeds from DriveTrain
-        drive right = new drive();
+            DriveTrain right = new DriveTrain();
             double driveRight = right.rightMotor();
 
         double driveTotal = driveLeft + driveRight;     //total motor output used to test if robot is moving

@@ -14,7 +14,7 @@ package org.usfirst.frc5490.RealRobot;
 import edu.wpi.first.wpilibj.*;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import java.util.Vector;
+//import java.util.Vector;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into

@@ -11,11 +11,13 @@
 
 package org.usfirst.frc5490.RealRobot.commands;
 
+//import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc5490.RealRobot.Robot;
-import org.usfirst.frc5490.RealRobot.RobotMap;
 
-import edu.wpi.first.wpilibj.Timer.*;
+import org.usfirst.frc5490.RealRobot.Robot;
+//import org.usfirst.frc5490.RealRobot.RobotMap;
+
+//import edu.wpi.first.wpilibj.Timer.*;
 /*
 import edu.wpi.first.wpilibj.Timer.start;
 import edu.wpi.first.wpilibj.Timer.stop;
@@ -42,11 +44,12 @@ public class  LiftCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	/*Timer liftTime;
+    	
+        liftTime = new Timer();
+        Timer start;
 
-        liftTime = new Timer;
-        liftTime.start;
-
-        double timePassed = liftTime.get;
+        double timePassed = Timer get;
 
         while (timePassed < 5)  {   //arbitrary number *
             RobotMap.liftLiftMotor.set(0.5);    //arbitrary number *
@@ -54,7 +57,7 @@ public class  LiftCommand extends Command {
         }
         RobotMap.liftLiftMotor.disable;
         liftTime.stop;
-        liftTime.reset;
+        liftTime.reset;*/
     }
 
     // Make this return true when this Command no longer needs to run execute()

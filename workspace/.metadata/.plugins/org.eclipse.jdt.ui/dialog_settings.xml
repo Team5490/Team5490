@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="/Users/admin/wpilib/java/current/lib" key="org.eclipse.jdt.ui.lastextjar"/>
 	<item value="2" key="org.eclipse.jdt.ui.last.selected.jre.kind2"/>
 	<item value="Java SE 8 [1.8.0_25]" key="org.eclipse.jdt.ui.last.selected.project.jre"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
@@ -9,7 +10,17 @@
 		<item value="1" key="rootMode"/>
 		<item value="false" key="linkWithEditor"/>
 	</section>
+	<section name="org.eclipse.jdt.internal.ui.wizards.buildpaths.NewVariableEntryDialog">
+		<item value="557" key="DIALOG_WIDTH"/>
+		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
+		<item value="347" key="DIALOG_HEIGHT"/>
+		<item value="97" key="DIALOG_X_ORIGIN"/>
+		<item value="36" key="DIALOG_Y_ORIGIN"/>
+	</section>
 	<section name="quick_assist_proposal_size">
+	</section>
+	<section name="BuildPathsPropertyPage">
+		<item value="2" key="pageIndex"/>
 	</section>
 	<section name="completion_proposal_size">
 	</section>
