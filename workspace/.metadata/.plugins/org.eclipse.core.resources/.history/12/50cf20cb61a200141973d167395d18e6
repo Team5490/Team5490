@@ -90,12 +90,6 @@ public void drive()  {  //drive method
         this.rightSpeed = 0.3;
     }                                               //end steering functions
 
-    if (leftSpeed > 1)	{
-    	this.leftSpeed = 1;
-    }
-    if (rightSpeed > 1)	{
-    	this.rightSpeed = 1;
-    }
     
 }
     
