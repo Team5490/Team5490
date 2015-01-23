@@ -81,11 +81,11 @@ public void drive()  {  //drive method
         this.rightSpeed = rightSpeed + Math.pow(xSteer, 3)/10;
     }
 
-    if (xSteer > 0.5 && driveSpeed == 0)  {
+    if (xSteer > 0 && driveSpeed == 0)  {
         this.leftSpeed = 0.3;
         this.rightSpeed = -0.3;
     }
-    if (xSteer < -0.5 && driveSpeed == 0)  {
+    if (xSteer < 0 && driveSpeed == 0)  {
         this.leftSpeed = -0.3;
         this.rightSpeed = 0.3;
     }                                               //end steering functions

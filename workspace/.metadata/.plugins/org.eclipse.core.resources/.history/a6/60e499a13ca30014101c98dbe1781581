@@ -71,7 +71,7 @@ public class OI {
         liftLevel1 = new JoystickButton(joystick, 6);   //lifting command on button 6
         liftLevel1.whenPressed(new LiftCommand());
         
-        throttleOnOff = new JoystickButton(joystick, 3);
+        throttleOnOff = new JoystickButton(joystick, 2);
         throttleOnOff.whenPressed(new ToggleThrottle());
 
 	    

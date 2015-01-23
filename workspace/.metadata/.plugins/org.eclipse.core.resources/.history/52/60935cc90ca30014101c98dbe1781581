@@ -59,7 +59,7 @@ public void drive()  {  //drive method
         //driveSpeed = -0.8;
     //}                             ////limits motor output to ± 8
 
-    if (driveSpeed < 0.1 && driveSpeed > 0)  {    //sets anything within ± 0.1 to zero...
+    if (driveSpeed < 0.1 && driveSpeed > 0)  {    //sets anything within ± 0.08 to zero...
         this.driveSpeed = 0;                             //...which is used to make turning in place easier
     }
     if (driveSpeed > -0.1 && driveSpeed < 0) {
@@ -72,25 +72,25 @@ public void drive()  {  //drive method
     double leftSpeed = driveSpeed;  //direct motor outputs for left and right sides
     double rightSpeed = driveSpeed;
 
-    if (xSteer > 0) {                               //steering functions
-        this.leftSpeed = leftSpeed + Math.pow(xSteer, 3)/10;
-        this.rightSpeed = rightSpeed - Math.pow(xSteer, 3/10);
+    if (xSteer > 1) {                               //steering functions
+        this.leftSpeed = leftSpeed + Math.pow(xSteer, 3)/6;
+        this.rightSpeed = rightSpeed - Math.pow(xSteer, 3/6);
     }
-    if (xSteer < 0) {
-        this.leftSpeed = leftSpeed - Math.pow(xSteer, 3)/10;
-        this.rightSpeed = rightSpeed + Math.pow(xSteer, 3)/10;
+    if (xSteer < 1) {
+        this.leftSpeed = leftSpeed - Math.pow(xSteer, 3)/6;
+        this.rightSpeed = rightSpeed + Math.pow(xSteer, 3)/6;
     }
 
-    if (xSteer > 0.5 && driveSpeed == 0)  {
+    if (xSteer > 0 && driveSpeed == 0)  {
         this.leftSpeed = 0.3;
         this.rightSpeed = -0.3;
     }
-    if (xSteer < -0.5 && driveSpeed == 0)  {
+    if (xSteer < 0 && driveSpeed == 0)  {
         this.leftSpeed = -0.3;
         this.rightSpeed = 0.3;
     }                                               //end steering functions
 
-    if (leftSpeed > 1)	{		//limits motor output to 0.99
+    if (leftSpeed > 1)	{
     	this.leftSpeed = 0.99;
     }
     if (rightSpeed > 1)	{
