@@ -73,12 +73,12 @@ public void drive()  {  //drive method
     double rightSpeed = driveSpeed;
 
     if (xSteer > 0) {                               //steering functions
-        this.leftSpeed = leftSpeed + Math.pow(xSteer, 3)/10;
-        this.rightSpeed = rightSpeed - Math.pow(xSteer, 3/10);
+        this.leftSpeed = leftSpeed + Math.pow(xSteer, throttleValue)/10;
+        this.rightSpeed = rightSpeed - Math.pow(xSteer, throttleValue/10);
     }
     if (xSteer < 0) {
-        this.leftSpeed = leftSpeed - Math.pow(xSteer, 3)/10;
-        this.rightSpeed = rightSpeed + Math.pow(xSteer, 3)/10;
+        this.leftSpeed = leftSpeed - Math.pow(xSteer, throttleValue)/10;
+        this.rightSpeed = rightSpeed + Math.pow(xSteer, throttleValue)/10;
     }
 
     if (xSteer > 0.5 && driveSpeed == 0)  {
