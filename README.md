@@ -1,7 +1,7 @@
 #Team 5490 Git Repository
 
 git gud
-^its ^a ^^funny ^^^^joke
+<sup>it's</sup> <sup>a</sup> <sup><sup>funny</sup></sup> <sup><sup><sup><sup>joke</sup></sup></sup></sup>
 
 
 WELCOME TO THE MORAVIAN ACADEMY ROARBOTS 2015 ROBOT CODING SHENANIGANS
