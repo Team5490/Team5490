@@ -80,6 +80,8 @@ There is more to git than this, but for the most part, aside from merging, you w
 
 	git add -A
 
+	**Note: ```git add *``` is getting deprecated. Don’t get used to it, use the -A tag.
+
 	git commit -m "I did it! I used a bit of git!"
 
 	git push origin master
