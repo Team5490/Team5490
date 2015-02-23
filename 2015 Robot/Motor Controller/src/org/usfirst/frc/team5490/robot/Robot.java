@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team5490.robot;
 
 
@@ -18,19 +17,22 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.Solenoid;
+//import edu.wpi.first.wpilibj.SolenoidBase;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Robot extends SampleRobot {
 	
+	boolean rancodeonce= false;
 	int session;
 	Image binaryFrame;
 	int imaqError;
 	Image frame;
 	Image frame2;
 	CameraServer camServer;
-    private SpeedController motor0;     //Defining everything
+    private SpeedController motor0;
     private SpeedController motor1;
     private DoubleSolenoid solenoid1;
     private SpeedController snowmotor0;
@@ -99,10 +101,12 @@ public class Robot extends SampleRobot {
 		//SmartDashboard.putNumber("Area min %", AREA_MINIMUM);
 
     	session = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+
     	//camServer = CameraServer.getInstance();
     	//camServer.setQuality(50);
     	//camServer.startAutomaticCapture("cam0");
     	NIVision.IMAQdxConfigureGrab(session);
+    	
     	
     	
 		
@@ -114,21 +118,16 @@ public class Robot extends SampleRobot {
         snowmotor0 = new Talon(2);
         snowmotor1 = new Talon(3);
         stick = new Joystick(0);   //Joystick, needs to be in port 0
-        xbox = new Joystick(1);    //360 Controller, needs to be in port 1
-                                   //If these get backwards the robot won't act. They can be dragged in driver station
         
-        solenoid1 = new DoubleSolenoid(0,1);  //Defining the solenoid.
+        
+        
+        solenoid1 = new DoubleSolenoid(0,1);  //Solenoid
     }
     public void autonomous() {
     	// BELOW IS AUTONOMOUS, CHANGE BACK LATER
 		//while (isOperatorControl() && isEnabled())
     	while (isAutonomous() && isEnabled())
 		{
-    		motor0.set(-0.3);
-    		motor1.set(0.3);             //This stuff we fix tomorrow (2/16)
-    		Timer.delay(2.0);
-    		motor0.set(0);
-    		motor1.set(0);
 			//read file in from disk. For this example to run you need to copy image20.jpg from the SampleImages folder to the
 			//directory shown below using FTP or SFTP: http://wpilib.screenstepslive.com/s/4485/m/24166/l/282299-roborio-ftp
 			//NIVision.imaqReadFile(frame, "/home/lvuser/SampleImages/image20.jpg");
@@ -183,7 +182,6 @@ public class Robot extends SampleRobot {
 				//This example only scores the largest particle. Extending to score all particles and choosing the desired one is left as an exercise
 				//for the reader. Note that the long and short side scores expect a single tote and will not work for a stack of 2 or more totes.
 				//Modification of the code to accommodate 2 or more stacked totes is left as an exercise for the reader.
-                //Well gee thanks wpilib
 				scores.Trapezoid = TrapezoidScore(particles.elementAt(0));
 				SmartDashboard.putNumber("Trapezoid", scores.Trapezoid);
 				scores.LongAspect = LongSideScore(particles.elementAt(0));
@@ -198,15 +196,72 @@ public class Robot extends SampleRobot {
 				//Send distance and tote status to dashboard. The bounding rect, particularly the horizontal center (left - right) may be useful for rotating/driving towards a tote
 				SmartDashboard.putBoolean("IsTote", isTote);
 				SmartDashboard.putNumber("Distance", computeDistance(binaryFrame, particles.elementAt(0), isLong));
-
+				double distance = computeDistance(binaryFrame, particles.elementAt(0), isLong);
+				
+				//Autonomous movement code below
+				
+				if (distance > 1) {
+					motor0.set(-0.19);  // This is different because of the natural tendency to drift but isn't perfect yet
+					motor1.set(0.2);    
+					Timer.delay(1);    
+					motor0.set(0);
+					motor1.set(0);
+					rancodeonce = true;
+					
+				}
+				else {
+					motor0.set(0);
+					motor1.set(0);
+					
+				}
+				distance = 0;
+					
 			} else {
 				SmartDashboard.putBoolean("IsTote", false);
+				if (rancodeonce == true) {
+					snowmotor0.set(1);
+	        		snowmotor1.set(-1);
+	        		Timer.delay(1); // PICKS TOTE UP
+	        		
+	        		
+	        		snowmotor0.set(0);
+	        		snowmotor1.set(0); // TURNS PICKING UP OFF
+	        		
+	        		motor0.set(0.5);
+	        		motor1.set(0.5); // MOVES DA SHIT AROUND IN A QUARTER CIRCLE
+	        		Timer.delay(0.15);// CALM DOWN TYLER
+	        		
+	        		
+	        		motor0.set(-0.4);
+					motor1.set(0.4); 
+					Timer.delay(1); // change this delay later MOVES DA st00f FORWARD
+					
+					
+					
+					motor0.set(0);
+					motor1.set(0); // turns da forward st00f off
+					
+					
+					snowmotor0.set(-0.3); // GOES DOWN - lift thing
+	        		snowmotor1.set(0.3);
+	        		Timer.delay(5); 
+	        		
+	        		
+	        		snowmotor0.set(0);
+	        		snowmotor1.set(0); // stops lift thing from going down
+	        		rancodeonce = false;
+				}
 			}
+			
+			          //end auto movement code
+			
 			/*motor0.set(-0.3);
     		motor1.set(0.3);
     		Timer.delay(2.0);
     		motor0.set(0);
     		motor1.set(0); */
+			
+			
 			
 			Timer.delay(0.005);				// wait for a motor update time
 		
@@ -216,7 +271,7 @@ public class Robot extends SampleRobot {
     }
 
     
-    public void operatorControl() {       //teleop
+    public void operatorControl() {
     	
     	NIVision.IMAQdxStartAcquisition(session);
     	NIVision.Rect rect = new NIVision.Rect(10, 10, 100, 100);
@@ -224,15 +279,14 @@ public class Robot extends SampleRobot {
     	
     	
         while (isOperatorControl() && isEnabled()) {
-        	int value = 0;
+        	
         	NIVision.IMAQdxGrab(session, frame2, 1);
-        	NIVision.imaqDrawShapeOnImage(frame2, frame2, rect, DrawMode.DRAW_VALUE, ShapeMode.SHAPE_OVAL, 0.0f); //most important line of code obvs
         	CameraServer.getInstance().setImage(frame2);
         	
         	
         	
-        	//SmartDashboard.putDouble("randomword", stick.getY());
-        	//SmartDashboard.putDouble("randomword2", stick.getZ());
+        	SmartDashboard.putDouble("randomword", stick.getY());
+        	SmartDashboard.putDouble("randomword2", stick.getZ());
         	
         	//double zNegativeBlockone = -0.2;
         	//if (stick.getY() > 0.1) {
@@ -292,24 +346,26 @@ public class Robot extends SampleRobot {
         	//test buttons
         	boolean button1 = stick.getRawButton(11);
         	boolean button2 = stick.getRawButton(12);
-        	boolean button3 = xbox.getRawButton(7);
-        	boolean button4 = xbox.getRawButton(8);
-        	double ltrigger = xbox.getRawAxis(2);
-        	double rtrigger = xbox.getRawAxis(3);
-            boolean xbutton1 = xbox.getRawButton(1);     // A Button on 360 controller
-            boolean xbutton2 = xbox.getRawButton(2);     // Y Button on 360 controller
+        	boolean button3 = stick.getRawButton(7);
+        	boolean button4 = stick.getRawButton(10);
+        	
+        	
+        	if (button2 == true && button3 == true) {
+        		motor0.set(stick.getY());
+        		motor1.set(stick.getY());                     //RAVE MODE ACTIVATE
+        		
+        	}
+        	//boolean button3 = xbox.getRawButton(7);
+        	//boolean button4 = xbox.getRawButton(8);
+        	//double ltrigger = xbox.getRawAxis(2);
+        	//double rtrigger = xbox.getRawAxis(3);
         	
         	//just for testing
-            //idk what would work better; analog triggers or just button on/off. Buttons seem to work tho.
-        	SmartDashboard.putDouble("whocares", ltrigger);
-        	SmartDashboard.putDouble("whocares", rtrigger);
-        	
-            //Lift
-            //These must always be set with one negative and the other positive so we don't destroy the motors
-            
-            if(button1) //Up when button 11 is held. Probably going to change this.
+        	//SmartDashboard.putDouble("whocares", ltrigger);
+        	//SmartDashboard.putDouble("whocares", rtrigger);
+        	if(button1) //Up
         		{
-        		snowmotor0.set(1.0);
+        		snowmotor0.set(1);
         		snowmotor1.set(-1);
         		}
         		
@@ -318,42 +374,51 @@ public class Robot extends SampleRobot {
         		snowmotor0.set(-0.3);
         		snowmotor1.set(0.3);
         	}
-        	else	         //Hold when nothing is held
-        		{
-        		snowmotor0.set(0);
-        		snowmotor1.set(0);
-        		}
+        	else
+        	{
+        			snowmotor0.set(0);
+        			snowmotor1.set(0);
+        	}
+        	
+        	
+        	if (button3) {
+        		motor0.set(0.1);
+        		motor1.set(-0.1);
+        	}
+        	else {
+        		motor0.set(0);
+        		motor1.set(0);
+        	}
         	
         	//Below here is for the analog trigger
-            //I was going to implement this, but because
-        	/*
-        	if(ltrigger > 1) //Up
+        	
+        	/*if(ltrigger > 1) //Up
     		{
     		snowmotor0.set(1.0);
     		snowmotor1.set(-1);
     		}
     		
-        	else if(rtrigger > 1) //Down
+        	else if(button2) //Down
         	{
     		snowmotor0.set(-0.3);
     		snowmotor1.set(0.3);
         	}
-        	else if((rtrigger > 1)&&(ltrigger > 1))
+        	else	
     		{
     		snowmotor0.set(0);
     		snowmotor1.set(0);
-    		}
-            */
+    		}*/
+    	
         	/*if(button2)
         		{snowmotor1.set(.3);}
         	else
         		{snowmotor1.set(0);}
         	*/
         	
-        	if(button3)
-        		{solenoid1.set(DoubleSolenoid.Value.kForward);}         //Start activates the solenoid
-        	else if(button4)
-        		{solenoid1.set(DoubleSolenoid.Value.kReverse);}         //Back puts it the other way
+        	//if(button3)
+        	//	{solenoid1.set(DoubleSolenoid.Value.kForward);}
+        	//else if(button4)
+        	//	{solenoid1.set(DoubleSolenoid.Value.kReverse);}
         	//else
     		//	{solenoid1.set(DoubleSolenoid.Value.kOff);}       We don't need it to be off I guess?
         		
@@ -367,11 +432,21 @@ public class Robot extends SampleRobot {
         	double spdLimit = (3 - throttle) / 4; //converts throttle range from -1,1 to 2,4
         		
         	//if (stick.getZ() < zNegativeBlockone || stick.getZ() > 0.1) {
+        	
+        	
         	motor0.set(spdLimit * Math.pow((y+z), 3)); //back left
+        	
+        	
         		//motor1.set(-1*(stick.getY() - stick.getZ()) * (stick.getY() - stick.getZ()) * (stick.getY() - stick.getZ())); // front left
         		//motor2.set((stick.getY() + stick.getZ()) * (stick.getY() + stick.getZ()) * (stick.getY() + stick.getZ())); // front right
         		//motor3.set((stick.getY() + stick.getZ()) * (stick.getY() + stick.getZ()) * (stick.getY() + stick.getZ())); // back right
+        	
+        	
+        	
         	motor1.set(-1 * spdLimit * Math.pow((y-z), 3));
+        	
+        	
+        	
         				//}
         	 
         	 
@@ -459,11 +534,7 @@ public class Robot extends SampleRobot {
         	}
 			*/
         	//This did something but I removed it and it threw errors so idk
-			value++;
-			if (value > 100) {
-				value = 0;
-			}
-			value = 5;
+			
         	
             Timer.delay(k_updatePeriod);
         }
